@@ -1,15 +1,13 @@
-import {GET_CITIES} from './actions';
+import {GET_ALBUMS} from './actions';
 
 const initialState = {
-  name: '',
-  age: 0,
-  cities: [],
+  albums: [],
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_CITIES:
-      return {...state, cities: action.payload};
+    case GET_ALBUMS:
+      return {...state, albums: action.payload};
     default:
       return state;
   }

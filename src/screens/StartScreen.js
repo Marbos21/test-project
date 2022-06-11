@@ -2,18 +2,18 @@ import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
-import {getCities} from '../redux/actions';
+import {getAlbums} from '../redux/actions';
 
 const keyExtractor = (item, index) => `${item.id}:${index}`;
 
 const StartScreen = ({navigation}) => {
-  const {cities} = useSelector(state => state.userReducer);
+  const {albums} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCities());
+    dispatch(getAlbums());
   }, [dispatch]);
 
-  const listMap = cities.reduce((carry, item) => {
+  const listMap = albums.reduce((carry, item) => {
     if (!carry[item.albumId]) {
       carry[item.albumId] = [];
     }

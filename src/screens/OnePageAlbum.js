@@ -37,7 +37,7 @@ const OnePageAlbum = ({route, navigation}) => {
                     zIndex: 10,
                   }}
                   onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={styles.textStyle}>Hide Photo</Text>
+                  <Text style={styles.textStyle}>X</Text>
                 </TouchableOpacity>
                 <FastImage
                   style={{width: '100%', height: '100%', borderRadius: 20}}
@@ -76,5 +76,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 30,
+    padding: 10,
+    borderRadius: 30,
+    backgroundColor: 'white',
   },
 });

@@ -1,8 +1,8 @@
-export const GET_CITIES = 'GET_CITIES';
+export const GET_ALBUMS = 'GET_ALBUMS';
 
 const API_URL = 'https://jsonplaceholder.typicode.com/photos';
 
-export const getCities = () => {
+export const getAlbums = () => {
   try {
     return async dispatch => {
       const result = await fetch(API_URL, {
@@ -14,7 +14,7 @@ export const getCities = () => {
       const json = await result.json();
       if (json) {
         dispatch({
-          type: GET_CITIES,
+          type: GET_ALBUMS,
           payload: json,
         });
       } else {

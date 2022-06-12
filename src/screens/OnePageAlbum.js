@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   Modal,
@@ -9,11 +9,18 @@ import {
   View,
 } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import {Portal} from 'react-native-portalize';
 const keyExtractor = (item, index) => `${item.id}:${index}`;
 
 const OnePageAlbum = ({route, navigation}) => {
   const {photos} = route.params;
   const [modalVisible, setModalVisible] = useState(false);
+  const [value, setValue] = useState('');
+  useEffect(() => {
+    return () => {
+      console.log(1);
+    };
+  }, [modalVisible]);
   return (
     <SafeAreaView>
       <FlatList
@@ -21,6 +28,18 @@ const OnePageAlbum = ({route, navigation}) => {
         keyExtractor={keyExtractor}
         renderItem={({item}) => (
           <View>
+            <TouchableOpacity
+              onPress={() => {
+                setValue(item.url), setModalVisible(!modalVisible);
+              }}>
+              <FastImage
+                style={{width: 150, height: 150, borderRadius: 20}}
+                resizeMode={FastImage.resizeMode.contain}
+                source={{
+                  uri: item.thumbnailUrl,
+                }}
+              />
+            </TouchableOpacity>
             <Modal
               animationType="slide"
               transparent={true}
@@ -36,27 +55,20 @@ const OnePageAlbum = ({route, navigation}) => {
                     right: 0,
                     zIndex: 10,
                   }}
-                  onPress={() => setModalVisible(!modalVisible)}>
+                  onPress={() => {
+                    setModalVisible(!modalVisible);
+                  }}>
                   <Text style={styles.textStyle}>X</Text>
                 </TouchableOpacity>
                 <FastImage
                   style={{width: '100%', height: '100%', borderRadius: 20}}
                   resizeMode={FastImage.resizeMode.contain}
                   source={{
-                    uri: item.url,
+                    uri: value,
                   }}
                 />
               </View>
             </Modal>
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <FastImage
-                style={{width: 150, height: 150, borderRadius: 20}}
-                resizeMode={FastImage.resizeMode.contain}
-                source={{
-                  uri: item.thumbnailUrl,
-                }}
-              />
-            </TouchableOpacity>
           </View>
         )}
       />
